@@ -1,0 +1,83 @@
+{
+  "name": "markdown-shiki",
+  "version": "0.0.1",
+  "displayName": "Markdown Preview Shiki Highlighting",
+  "description": "Uses Shiki for VS Code's built-in markdown preview syntax highlighting, which better matches VS Code's built-in highlighter.",
+  "icon": "resources/logo.png",
+  "keywords": [
+    "markdown",
+    "highlighting",
+    "preview",
+    "shiki",
+    "code"
+  ],
+  "publisher": "bierner",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/mjbvz/vscode-markdown-shiki.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mjbvz/vscode-markdown-shiki/issues"
+  },
+  "engines": {
+    "vscode": "^1.31.0"
+  },
+  "activationEvents": [],
+  "main": "./index.js",
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "markdown.markdownItPlugins": true,
+    "configuration": {
+      "title": "Markdown Shiki",
+      "properties": {
+        "markdownShiki.theme": {
+          "description": "Shiki theme to use in the markdown Preview",
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "abyss",
+            "dark_plus",
+            "dark_vs",
+            "hc_black",
+            "kimbie_dark",
+            "light_plus",
+            "light_vs",
+            "monokai",
+            "monokai_dimmed",
+            "quietlight",
+            "red",
+            "solarized_dark",
+            "solarized_light",
+            "Material-Theme-Darker-High-Contrast",
+            "Material-Theme-Darker",
+            "Material-Theme-Default-High-Contrast",
+            "Material-Theme-Default",
+            "Material-Theme-Lighter-High-Contrast",
+            "Material-Theme-Lighter",
+            "Material-Theme-Ocean-High-Contrast",
+            "Material-Theme-Ocean",
+            "Material-Theme-Palenight-High-Contrast",
+            "Material-Theme-Palenight",
+            "nord",
+            "min-light",
+            "min-dark",
+            "white",
+            "white-night",
+            "zeit"
+          ],
+          "default": "dark_plus"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "shiki": "^0.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^11.9.4",
+    "@types/vscode": "^1.33"
+  },
+  "scripts": {}
+}
