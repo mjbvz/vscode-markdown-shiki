@@ -20,7 +20,7 @@
     "url": "https://github.com/mjbvz/vscode-markdown-shiki/issues"
   },
   "engines": {
-    "vscode": "^1.31.0"
+    "vscode": "^1.38.0"
   },
   "activationEvents": [],
   "main": "./index.js",
@@ -77,7 +77,7 @@
   },
   "devDependencies": {
     "@types/node": "^11.9.4",
-    "@types/vscode": "^1.33"
+    "@types/vscode": "^1.38"
   },
   "scripts": {}
 }
