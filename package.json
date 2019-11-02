@@ -1,6 +1,6 @@
 {
   "name": "markdown-shiki",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "displayName": "Markdown Preview Shiki Highlighting",
   "description": "Uses Shiki for VS Code's built-in markdown preview syntax highlighting, which better matches VS Code's built-in highlighter.",
   "icon": "resources/logo.png",
@@ -35,7 +35,10 @@
         "markdownShiki.theme": {
           "markdownDescription": "Shiki theme to use in the markdown Preview. When set to `null` - uses active color theme.",
           "scope": "window",
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "abyss",
@@ -75,7 +78,7 @@
   },
   "dependencies": {
     "oniguruma": "^7.2.0",
-    "shiki": "^0.1.5"
+    "shiki": "^0.1.6"
   },
   "devDependencies": {
     "@types/node": "^11.9.4",
