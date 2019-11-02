@@ -2,13 +2,23 @@
 
 const vscode = require('vscode');
 const shiki = require('shiki');
+const path = require('path');
 
 module.exports.activate = (context) => {
     vscode.workspace.onDidChangeConfiguration((change) => {
-        if (change.affectsConfiguration('markdownShiki.theme')) {
+        if (change.affectsConfiguration('markdownShiki.theme') ||
+            change.affectsConfiguration('workbench.colorTheme')) {
             applyHighlighter();
         }
     }, undefined, context.subscriptions);
+
+    // Default thems use `include` option that shiki doesn't support
+    const defaultThemesMap = {
+        'Visual Studio Light': 'light_vs',
+        'Default Light+': 'light_plus',
+        'Visual Studio Dark': 'dark_vs',
+        'Default Dark+': 'dark_plus'
+    }
 
     // Create mutable closure var that we can return to markdown-it but override at later points
     let doHighlight = (_code, _lang) => '';
@@ -24,9 +34,22 @@ module.exports.activate = (context) => {
     }
 
     function applyHighlighter() {
-        const theme = vscode.workspace.getConfiguration('markdownShiki').get('theme');
+        const configTheme = vscode.workspace.getConfiguration('markdownShiki').get('theme');
+        const currentThemeName = vscode.workspace.getConfiguration('workbench').get('colorTheme');
+        let theme = configTheme;
+
+        if (theme === null) {
+            if (defaultThemesMap[currentThemeName]) {
+                theme = defaultThemesMap[currentThemeName];
+            } else {
+                const colorThemePath = getCurrentThemePath(currentThemeName);
+                if (colorThemePath) {
+                    theme = shiki.loadTheme(colorThemePath);
+                    theme.name = 'random';// Shiki doesn't work without name and defaults to `Nord`
+                }
+            }
+        }
         shiki.getHighlighter({ theme }).then(highlighter => {
-            
             // The preview will already have been rendered at this point so refresh it
             vscode.commands.executeCommand('markdown.preview.refresh');
 
@@ -34,16 +57,26 @@ module.exports.activate = (context) => {
                 try {
                     const languageId = getLanguageId(lang);
                     if (languageId) {
-                        return highlighter.codeToHtml(code, languageId)
+                        return highlighter.codeToHtml(code, languageId);
                     }
-                } catch {
+                } catch (err) {
                     // noop
                 }
 
                 // Fallback to default highligher
                 return defaultHighlight(code, lang);
             };
-        });
+        })
+    }
+    function getCurrentThemePath(themeName) {
+        for (const ext of vscode.extensions.all) {
+            const themes = ext.packageJSON.contributes && ext.packageJSON.contributes.themes;
+            if (!themes) continue;
+            const theme = themes.find(theme => theme.label === themeName || theme.id === themeName);
+            if (theme) {
+                return path.join(ext.extensionPath, theme.path);
+            }
+        }
     }
 }
 
