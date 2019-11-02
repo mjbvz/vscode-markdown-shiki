@@ -33,10 +33,11 @@
       "title": "Markdown Shiki",
       "properties": {
         "markdownShiki.theme": {
-          "description": "Shiki theme to use in the markdown Preview",
+          "markdownDescription": "Shiki theme to use in the markdown Preview. When set to `null` - uses active color theme.",
           "scope": "window",
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
+            null,
             "abyss",
             "dark_plus",
             "dark_vs",
@@ -67,7 +68,7 @@
             "white-night",
             "zeit"
           ],
-          "default": "dark_plus"
+          "default": null
         }
       }
     }
