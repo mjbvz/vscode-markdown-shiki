@@ -49,6 +49,13 @@ module.exports.activate = (context) => {
                 }
             }
         }
+
+        if (typeof theme === 'string') {
+            theme = shiki.getTheme(theme);
+        }
+
+        theme.bg = ' '; // Don't set bg so that we use the preview's standard styling
+
         shiki.getHighlighter({ theme }).then(highlighter => {
             // The preview will already have been rendered at this point so refresh it
             vscode.commands.executeCommand('markdown.preview.refresh');
