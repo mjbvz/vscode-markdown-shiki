@@ -1,15 +1,16 @@
 {
   "name": "markdown-shiki",
-  "version": "0.1.0",
-  "displayName": "Markdown Preview Shiki Highlighting",
-  "description": "Uses Shiki for VS Code's built-in markdown preview syntax highlighting, which better matches VS Code's built-in highlighter.",
+  "version": "0.1.1",
+  "displayName": "Markdown Preview VS Code Highlighting",
+  "description": "Use VS Code's highlighter for code blocks in the built-in markdown preview.",
   "icon": "resources/logo.png",
   "keywords": [
     "markdown",
     "highlighting",
     "preview",
     "shiki",
-    "code"
+    "code",
+    "code block"
   ],
   "publisher": "bierner",
   "license": "MIT",
